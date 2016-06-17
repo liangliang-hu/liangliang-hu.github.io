@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+body{background:#ccc;}
+#div1{position: relative;width:300px;height:300px;border:1px solid #000;box-shadow:1px 2px 3px #000;border-radius:50%;margin:100px auto;background:#fff;} 
+#div1 .pac{position: absolute;left:50%;top:50%;margin:-15px;width:30px;height:30px;background:#000;border-radius:50%;}
+#div1 .hour,#div1 .min,#div1 .sec{position: absolute;left:50%;top:0%;background:#000;transform-origin: center bottom;} 
+#div1 .hour{position: absolute;left:50%;top:50%;width:20px;height:80px;margin-left:-10px;margin-top:-80px;} 
+#div1 .min{position: absolute;left:50%;top:50%;width:12px;height:100px;margin-left:-6px;margin-top:-100px;} 
+#div1 .sec{position: absolute;left:50%;top:50%;width:4px;height:120px;margin-left:-2px;margin-top:-120px;background:red;}
+#div1 span{position:absolute;left:50%;top:0px;width:4px;height:8px;margin-left:-2px;transform-origin: center 150px;background:#000;}
+#div1 span em{position:absolute;left:50%;top:12px;width:40px;margin-left:-20px;font-style:normal;text-align:center;}
+#div1 span.on{height:12px;}
+</style>
+<script>
+window.onload = function(){
+	var oDiv=document.querySelector("#div1");
+    var oHi=oDiv.querySelector(".hour");
+    var oMi=oDiv.querySelector(".min");
+    var oSi=oDiv.querySelector(".sec");
+    clock();
+    setInterval(clock,1000);
+    function clock(){
+        var oDate=new Date();
+	    var Hi=oDate.getHours();
+	    var Mi=oDate.getMinutes();
+	    var Si=oDate.getSeconds();
+	    var Sc=oDate.getMilliseconds();
+	    oHi.style.transform='rotate('+(Hi*30+Mi/60*30)+'deg)';
+	    oMi.style.transform='rotate('+(Mi*6+Si/60*6)+'deg)';
+	    oSi.style.transform='rotate('+(Si*6+Sc/1000*6)+'deg)';
+    }
+    for(var i=0; i<60; i++){
+        var oSpan=document.createElement("span");
+	    oDiv.appendChild(oSpan);
+	    if(i%5==0){
+           oSpan.classList.add("on");
+           oSpan.innerHTML='<em>'+(i==0?12:i/5)+'<\/em>';
+           oSpan.children[0].style.transform='rotate('+-i*6+'deg)';
+        }
+	    oSpan.style.transform='rotate('+i*6+'deg)';
+    }
+    
+};
+</script>
+</head>
+
+<body>
+<div id="div1">
+    <div class="hour"></div>
+    <div class="min"></div>
+    <div class="sec"></div>
+    <div class="pac"></div>
+    <!-- <span><em>12</em></span> -->
+</div>
+</body>
+</html>

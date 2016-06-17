@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>js图片展示</title>
+  <link rel="shortcut icon" href="images/logoicon.ico" type="image/x-icon" /> 
+  <link rel="icon" href="images/logoicon.ico" type="image/x-icon" />
+<style type="text/css">
+* { padding: 0; margin: 0; list-style: none;}
+img { border: none; }
+body { background: #ececec;}
+#yixing { width: 970px; height: 344px; position: relative; margin: 140px auto;overflow: hidden; }
+#yixing .prev { width: 76px; height: 112px; position: absolute; top: 116px; left: 0;
+ background: url(images/prev.png); color: #000;z-index: 999;}
+#yixing .next  { width: 76px; height: 112px; position: absolute; top: 116px; right: 0; 
+    background: url(images/next.png) no-repeat;cursor: pointer; z-index: 999;}
+#yixing ul { width: 970px; height: 344px; position: absolute; top: 0; left: 0; z-index: 1; }
+#yixing li { position: absolute; }
+#yixing .line { border: 4px solid #70A114; width: 672px; height: 336px; position: absolute; top: 0; left: 50%; margin-left: -340px; z-index: 3; }
+#yixing .pos_0 { top: -104px; left: 0; z-index: 1; opacity: 0;}
+#yixing .pos_1 { top: 104px; left: 0; z-index: 2; opacity: 0.6;}
+#yixing .pos_2 { top: 43px; left: 50px; z-index: 3;  opacity: 0.8;}
+#yixing .pos_3 { top: 0; left: 145px; z-index: 4; }
+#yixing .pos_4 { top: 43px; right: 50px; z-index: 3; opacity: 0.8; }
+#yixing .pos_5 { top: 104px; right: 0; z-index: 2; opacity: 0.6;} 
+#yixing .pos_6 { top: -104px; right: 0; z-index: 1; opacity: 0; }
+</style>
+
+</head>
+
+<body>
+
+<div id="yixing">
+    <a class="prev" href="javascript:;"></a>
+    <a class="next" href="javascript:;"></a>
+    <div class="line"></div>
+    <ul>
+        <li class="pos_0"><img src="images/img/0.jpg" width="100" /></li>
+        <li class="pos_1"><img src="images/img/1.jpg" width="270" /></li>
+        <li class="pos_2"><img src="images/img/2.jpg" width="510" /></li>
+        <li class="pos_3"><img src="images/img/3.jpg" width="680" /></li>
+        <li class="pos_4"><img src="images/img/4.jpg" width="510" /></li>
+        <li class="pos_5"><img src="images/img/5.jpg" width="270" /></li>
+        <li class="pos_6"><img src="images/img/6.jpg" width="270" /></li>
+        <li class="pos_6"><img src="images/img/7.jpg" width="270" /></li>
+    </ul>
+</div>
+<script type="text/javascript">
+window.onload = function(){
+    var oDiv=document.getElementById('yixing');
+    var oPrevBtn=oDiv.getElementsByClassName('prev')[0];
+    var oNextBtn=oDiv.getElementsByClassName('next')[0];
+    var aLi=oDiv.getElementsByTagName('ul')[0].getElementsByTagName('li');
+    var aLiInit=[];
+    var oLine=oDiv.getElementsByClassName('line')[0];
+    var i=0;
+    for(i=0;i<aLi.length;i++){
+        aLiInit[i]={};
+        aLi[i].width=aLiInit[i].w= aLi[i].getElementsByTagName('img')[0].offsetWidth ;
+        aLi[i].height=aLiInit[i].h=aLi[i].getElementsByTagName('img')[0].offsetHeight ;
+        aLi[i].left=aLiInit[i].l=aLi[i].offsetLeft;
+        aLi[i].top=aLiInit[i].t=aLi[i].offsetTop;
+        aLi[i].alpha=aLiInit[i].alpha=0;
+        aLi[i].z=aLiInit[i].z=1;
+    }
+    for(i=0;i<aLi.length;i++){
+        aLi[i].style.position='absolute';
+        aLi[i].style.left=aLiInit[i].l+'px';
+        aLi[i].style.top=aLiInit[i].t+'px';
+    }
+    
+    aLi[1].alpha=aLiInit[1].alpha=60;
+    aLi[2].alpha=aLiInit[2].alpha=80;
+    aLi[3].alpha=aLiInit[3].alpha=100;
+    aLi[4].alpha=aLiInit[4].alpha=80;
+    aLi[5].alpha=aLiInit[5].alpha=60;
+    aLi[1].z=aLiInit[1].z=2;
+    aLi[2].z=aLiInit[2].z=3;
+    aLi[3].z=aLiInit[3].z=4;
+    aLi[4].z=aLiInit[4].z=3;
+    aLi[5].z=aLiInit[5].z=2;
+    oPrevBtn.onmousedown=function (){
+        gotoImg(true);
+    };
+    oNextBtn.onmousedown=function (){
+        gotoImg(false);
+    };
+    function gotoImg(bLeft){
+        if(bLeft){
+            aLiInit.push(aLiInit.shift());
+        }else{
+            aLiInit.unshift(aLiInit.pop());
+        }
+        oLine.style.display='none';
+        for(i=0;i<aLi.length;i++){
+            startMove(aLi[i], {left: aLiInit[i].l, top: aLiInit[i].t, width: aLiInit[i].w, 
+                height:aLiInit[i].h, alpha:aLiInit[i].alpha, zIndex:aLiInit[i].z}, 300, function (){oLine.style.display='block';});
+        }
+    }
+};
+function startMove(obj, oParams, iTime, fnCallBackEnd){
+    var iInterval=45;
+    var iEndTime=(new Date()).getTime()+iTime;
+    var iTimes=Math.ceil(iTime/iInterval);
+    var oSpeed={};
+    if(typeof obj.timer=='undefined'){obj.timer=null;}
+    for(key in oParams){oSpeed[key]=(oParams[key]-obj[key])/iTimes;}
+    if(obj.timer){clearInterval(obj.timer);}
+    obj.timer=setInterval(function (){
+            doMove(obj, oParams, oSpeed, iEndTime, fnCallBackEnd);
+        }, iInterval);
+}
+
+function doMove(obj, oTarget, oSpeed, iEndTime, fnCallBackEnd){
+    var iNow=(new Date()).getTime();
+    if(iNow>=iEndTime){
+        clearInterval(obj.timer);
+        obj.timer=null;
+        for(key in oTarget){
+            obj[key]=oTarget[key];
+            switch(key){
+                case 'alpha':
+                    obj.style.opacity=oTarget[key]/100;
+                    obj.style.filter="alpha(opacity:"+oTarget[key]+")";
+                    break;
+                case 'zIndex':
+                    obj.style.zIndex=oTarget[key];
+                    break;
+                case 'width':
+                case 'height':
+                    obj.getElementsByTagName('img')[0].style[key]=oTarget[key]+'px';
+                    break;
+                default:
+                    obj.style[key]=oTarget[key]+'px';
+                    break;
+            }
+        }
+        if(fnCallBackEnd){fnCallBackEnd();}
+
+    }else{
+        for(key in oTarget){
+            obj[key]+=oSpeed[key];
+            switch(key){
+                case 'alpha':
+                    obj.style.opacity=obj[key]/100;
+                    obj.style.filter="alpha(opacity:"+obj[key]+")";
+                    break;
+                case 'zIndex':
+                    obj.style.zIndex=oTarget[key];
+                    break;
+                case 'width':
+                case 'height':
+                    obj.getElementsByTagName('img')[0].style[key]=obj[key]+'px';
+                    break;
+                default:
+                    obj.style[key]=obj[key]+'px';
+                    break;
+            }
+        }
+    }
+}
+</script>
+</body>
+</html>

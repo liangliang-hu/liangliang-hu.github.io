@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+body{background:#ccc;}
+#btn1{position:relative;left:50%;top:80px;width:120px;height:40px;background:yellow;margin-left:-60px;}
+#div1{ position:relative;width:500px; height:300px;border:1px solid #000; margin:100px auto; background:url(images/t1.jpg)  no-repeat;overflow:hidden;}
+#div1 span{ position:absolute;left:0;top:0;width:100px; height:100px; background:url(images/t0.jpg) no-repeat;
+	background-position:0 0; line-height:100px; text-align:center; font-size:30px; color:#fff;
+}
+</style>
+<script src="js/move1.js"></script>
+<script>
+window.onload = function(){
+	var oDiv = document.getElementById("div1");
+	
+	var R = 3;
+	var C = 5;
+	
+	//创建span
+	for(var r = 0; r < R; r++){
+		for(var c = 0; c < C; c++){
+			var oSpan = document.createElement("span");
+			oDiv.appendChild(oSpan);
+			oSpan.style.width = oDiv.offsetWidth/C + "px";
+			oSpan.style.height = oDiv.offsetHeight/R + "px";
+			
+			oSpan.style.left = oSpan.offsetWidth*c + "px";
+			oSpan.style.top  = oSpan.offsetHeight*r + "px";
+			
+			oSpan.style.backgroundPosition = -oSpan.offsetLeft+"px -" + oSpan.offsetTop + "px";
+		}
+	}
+	
+	/*
+		span 老图
+		div  新图 
+	*/
+	var oBtn = document.getElementById("btn1");
+	var aSpan = oDiv.children;
+	
+	var iNow = 0;
+	var bReady = true;//准备好了
+	oBtn.onclick = function(){
+		if(!bReady) return;
+		bReady = false;
+		
+		//span 老图
+		for(var i = 0; i < aSpan.length; i++){
+			aSpan[i].style.opacity = "1";
+			aSpan[i].style.backgroundImage = "url(images/"+"t"+iNow+".jpg)";
+		}
+		
+		iNow++;
+		if(iNow == 5){
+			iNow = 0;
+		}
+		//div  新图 
+		oDiv.style.backgroundImage = "url(images/"+"t"+iNow+".jpg)";
+		
+		 
+		 //循环
+		 var count = 0;
+		 for(var i = 0; i < aSpan.length; i++){
+			(function(index){
+				setTimeout(function(){
+					move(aSpan[index],{opacity:0},{
+						complete:function(){
+							count++;
+							if(count == aSpan.length - 1){
+								bReady = true;
+							}	
+						}	
+					});	
+				},600*Math.random()); 
+			})(i);
+	     } 
+	};
+	
+ 
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="点击切换下一张" />
+<div id="div1">
+	<!--<span></span>-->
+</div>
+</body>
+</html>

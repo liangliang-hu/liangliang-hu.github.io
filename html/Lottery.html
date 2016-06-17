@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <style>
+    body{background:#ccc;}
+    *{margin:0;padding:0;list-style:none;}
+    input{width:80px;height:30px;line-height:30px;background:green;color:#fff;margin-top:10px;}
+    #ul1{width:420px;margin:30px auto;text-align:center;line-height:50px;font-size:20px;}
+    #ul1 li{float:left;width:50px;height:50px;border-radius:50%;background:yellow;margin-right:10px;color:#000;}
+    #ul1 .list1{background:red;}
+    </style>
+	<script>
+    window.onload=function(){
+        var oUl = document.getElementsByTagName('ul')[0];
+        var aLi = oUl.getElementsByTagName('li');
+        var oBlue = aLi[aLi.length-1];
+        var oBtn = document.getElementById('btn');
+        oBtn.onclick=function(){    
+            getNum();
+        }
+        getNum();
+        function getNum(){
+            var arr=[];
+            while(arr.length<6){
+                var num = addZero(rnd(1,34));
+                if(!findInArr(arr,num)){
+                    arr.push(num);  
+                }
+            }   
+            
+            for(var i=0;i<aLi.length-1;i++){
+                aLi[i].innerHTML = arr[i];  
+            }
+            
+            var num = addZero(rnd(1,16));
+            oBlue.innerHTML=num;
+        }
+        
+        function findInArr(arr,n){
+            for(var i=0;i<arr.length;i++){
+                if(arr[i]==n){
+                    return true;
+                }   
+            }   
+            return false;
+        }
+        function rnd(n,m){
+            return parseInt(n+Math.random()*m); 
+        }
+        function addZero(n){
+            return n<10 ? '0'+n : ''+n;     
+        }   
+    }
+
+	</script>
+</head>
+<body>
+<ul id="ul1">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li class="list1">7</li>
+</ul>
+<input type="button" value="快来一注吧" id="btn" />   
+</body>
+</html>
+
+
+
+   

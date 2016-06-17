@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+*{margin:0;padding:0;list-style:none;}
+#div1{width:966px; margin:0 auto; overflow:hidden;}
+#div1 ul{float:left;width:300px; border:1px solid red; margin:0 10px;}
+#div1 ul li{width:100%; background:#ccc; margin:10px 0;}
+</style>
+<script>
+window.onload = function(){
+	var oDiv = document.getElementById("div1");
+	var aUl  = oDiv.children;
+	var len  = aUl.length;
+	
+	function createLi(){
+		//先创建20个
+		for(var i = 0; i < 20; i++){
+			//创建li
+			var oLi = document.createElement("li");
+			oLi.style.height = Math.floor(Math.random()*350 + 50) + "px";
+			
+			var h0 = aUl[0].offsetHeight;
+			var h1 = aUl[1].offsetHeight;
+			var h2 = aUl[2].offsetHeight;
+			var oMinUl = null;
+			//插入？ 最短的ul?
+			if(h0 < h1){//ul0 最短
+				if(h0 < h2){//ul0 最短
+					oMinUl = aUl[0];
+				} else {//ul2 最短
+					oMinUl = aUl[2];
+				}
+			} else {
+				if(h1 < h2){//ul1 最短
+					oMinUl = aUl[1];
+				} else {////ul2 最短
+					oMinUl = aUl[2];
+				}
+			}
+			
+			//插入
+			oMinUl.appendChild(oLi);
+		}
+	}
+	
+	createLi();
+	//判断到底
+	window.onscroll = function(){
+		
+		var scrollTop = document.documentElement.scrollTop ||document.body.scrollTop;
+		var clientH = document.documentElement.clientHeight;
+		
+		var bodyH = document.body.offsetHeight;
+		 
+		if(scrollTop + clientH >= bodyH){
+			//alert("到底了");
+			setTimeout(function(){
+				createLi();
+			},1000);
+		}
+	};
+	
+ 
+};
+</script>
+</head>
+
+<body>
+<div id="div1">
+	<ul></ul>
+	<ul></ul>
+	<ul></ul>
+</div>
+
+</body>
+</html>
