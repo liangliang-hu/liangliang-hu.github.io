@@ -2,14 +2,14 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title></title>
+<title>手风琴</title>
 <style>
-body{background:#ccc;}
+body{background:#f96;}
 *{margin:0;padding:0;list-style:none;}
-#ul1{ position:relative;width:840px; height:305px;  margin:30px auto; overflow:hidden;}
-#ul1 li{ position:absolute;left:0;top:0;width:840px; height:100%;}
+#ul1{ position:relative;width:990px; height:550px;margin:30px auto; overflow:hidden;}
+#ul1 li{ position:absolute;left:0;top:0;width:990px; height:100%;}
 #ul1 li img{width:100%; height:100%;} 
-#ul1 li span{ position:absolute;left:0;top:0;width:20px; height:100%; line-height:305px; text-align:center;}
+#ul1 li span{ position:absolute;left:0;top:0;width:20px; height:100%; line-height:550px; text-align:center;}
 </style>
 <script src="js/move1.js"></script>
 <script>
@@ -19,12 +19,12 @@ window.onload = function(){
 	var aLi = oUl.children;
 	var len = aLi.length; 
 	
-	//算ul宽度  840 + 20*(len - 1);
- 	oUl.style.width = 840 + 20*(len - 1) + "px";
+	//算ul宽度  990 + 20*(len - 1);
+ 	oUl.style.width = 990 + 20*(len - 1) + "px";
 	
-	//li定位 840+20*(n-1)
+	//li定位 990+20*(n-1)
 	for(var i = 1; i < len; i++){
-		aLi[i].style.left = 840 + 20*(i - 1) + "px"; 
+		aLi[i].style.left = 990 + 20*(i - 1) + "px"; 
 	}
 	
 	for (var i = 0; i < len; i++) {
@@ -34,7 +34,7 @@ window.onload = function(){
 	              	  if(i<=index){ 
 	                        move(aLi[i],{left:i*20});
 	              	  }else{
-	                        move(aLi[i],{left:840+20*(i-1)});
+	                        move(aLi[i],{left:990+20*(i-1)});
 	              	  }
 	              }
 			 };
@@ -49,12 +49,12 @@ window.onload = function(){
 <body>
 
 <ul id="ul1">
-	<li><img src="images/00.jpg" /><span style="background:#5E3DE0;">0</span></li>
-	<li><img src="images/01.jpg" /><span style="background:#5EDE30;">1</span></li>
-	<li><img src="images/02.jpg" /><span style="background:#05EE3D;">2</span></li>
-	<li><img src="images/03.jpg" /><span style="background:#EE35D0;">3</span></li>
-	<li><img src="images/00.jpg" /><span style="background:#53EED0;">4</span></li>
-	<li><img src="images/01.jpg" /><span style="background:#E5E3D0;">5</span></li>
+	<li><img src="images/wang0.jpg" /><span style="background:#5E3DE0;">0</span></li>
+	<li><img src="images/wang1.jpg" /><span style="background:#5EDE30;">1</span></li>
+	<li><img src="images/wang2.jpg" /><span style="background:#05E460;">2</span></li>
+	<li><img src="images/wang3.jpg" /><span style="background:#EE35D0;">3</span></li>
+	<li><img src="images/wang4.jpg" /><span style="background:#53EED0;">4</span></li>
+	<li><img src="images/wang5.jpg" /><span style="background:#E5E3D0;">5</span></li>
 </ul>
 
 </body>

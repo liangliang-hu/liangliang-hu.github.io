@@ -2,20 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Document</title>
+<title>自动播放选项卡</title>
 <link rel="stylesheet" href="css/common.css">
 <style>
 body{background:#ccc;}
-#play{width:670px;height:240px;position:relative;margin:150px auto;overflow:hidden;}
-#play ol{/*width:100%;*/position:absolute;left:50%;bottom:5px;text-align:center;line-height:20px;color:#fff;z-index:2;margin-left:-60px;}
+#play{width:620px;height:300px;position:relative;margin:150px auto;overflow:hidden;}
+#play ol{position:absolute;left:50%;bottom:5px;text-align:center;line-height:20px;color:#fff;z-index:2;margin-left:-60px;}
 #play ol li{float:left;width:20px;height:20px;background:#f63;margin:0 2px;cursor:pointer;}
 #play .active{background:green;height:22px;bottom:2px;position: relative;}
-#play ul{/*height:150px;*/position: absolute;left:0;top:0;}
-#play ul li{float:left;width:670px;height:240px;}
+#play ul{position: absolute;left:0;top:0;}
+#play ul li{float:left;width:620px;height:300px;}
 #play ul li img{float:left;width:100%;height:100%;}
 #prev,#next{width:30px;height:30px;background:#ccc;position: absolute;top:50%;text-align:center;line-height:30px;z-index:3;cursor:pointer;opacity:0.5;margin-top:-10px;}
-#prev:hover{opacity:1;background:yellow;}
-#next:hover{opacity:1;background:yellow;}
+#play:hover #prev,#play:hover #next{opacity:1;background:yellow;}
 #prev{left:0;}
 #next{right:0;}
 

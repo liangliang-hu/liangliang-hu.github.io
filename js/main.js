@@ -103,9 +103,9 @@ $(function(){
         var aPos = [];
         var ready = true;
         var count = 0;
-        var textArr = ['轮播图','点击切换图片','手风琴','随机换图','碰撞换位','拖拽碰撞','随机彩票','时钟'];
+        var textArr = ['轮播图','时钟','手风琴','随机换图','碰撞换位','拖拽碰撞','随机彩票','点击切换图片'];
         var imgArr = ['w1','w12','w3','w7','w5','w6','w11','w8'];
-        var hrefArr = ['html/Play.html','html/XY.html','html/Accordion.html','html/Random.html','html/Pic.html','html/Movego.html','html/Lottery.html','html/timer.html'];
+        var hrefArr = ['html/Play.html','html/timer.html','html/Accordion.html','html/Random.html','html/Pic.html','html/Movego.html','html/Lottery.html','html/XY.html'];
         for(var i=0;i<stepLi.length;i++){
             aPos.push({
                 left:stepLi[i].offsetLeft,

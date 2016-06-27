@@ -61,12 +61,6 @@ background-size: cover;}
 .tips li.cur{margin-right:0;}
 .tips li:hover{transform: rotateZ(180deg) scale(-2,-2);}
 
-.screen-three{background: url(../img/bg_02.jpg) no-repeat;-webkit-background-size: cover;
-background-size: cover;}
-html .can{padding:30px 0 0 30px; width: 330px;height:430px;top:0; font-size: 24px;line-height: 35px;color:#fff;background: rgba(0,0,0,.7);box-sizing: border-box;box-shadow: 0 0 10px #fff;-webkit-box-shadow: 0 0 30px #fff;border-radius: 10px;}
-html .can:nth-child(1){left: 780px;}
-.can p{text-indent:2rem;font-size:20px;}
-
 .screen-four{background: url(../img/bg_04.jpg) no-repeat;-webkit-background-size: cover;
 background-size: cover;}
 .screen-five{background: url(../img/bg_05.jpg) no-repeat;-webkit-background-size: cover;
